@@ -12,8 +12,11 @@ M.setup = function(opts)
     config.rust_debug_adapter = opts.rust_debug_adapter
   end
 
-  local init_rust_commands = opts.init_rust_commands or config.init_rust_commands
-  if init_rust_commands then
+  if opts.init_rust_commands ~= nil then
+      config.init_rust_commands = opts.init_rust_commands
+  end
+
+  if config.init_rust_commands then
     vim.lsp.commands["rust-analyzer.runSingle"] = function(command)
       rr.run_command(command.arguments[1].args)
     end

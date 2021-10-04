@@ -1,36 +1,39 @@
 # lsp_codelens_extensions.nvim
-Adds client-side code for codelenses commands not in the language servers. 
+Adds client-side code for codelenses commands that are not available in the language servers. 
 
 ## Motivation 
-Some servers provide some codelenses that cannot be run by default on the server and needs some client-code
-like rust-analyzer's runnables, neovim provides the option to add custom commands for the clients and
-validates these before sending a command to a server, this plugin intends to add that missing functionality.
+Some servers provide some codelenses that cannot be run by default on the server and need some client-code
+like rust-analyzer's runnables. Neovim provides the option to add custom commands for the clients and
+validates these before sending a command to a server.
 
-## What isn't this plugin
-- This plugin DO NOT intend to give an out of the box experience for LSP or DAP, some plugins already 
+This plugin intends to add that missing functionality.
+
+## What this plugin is not?
+- This plugin DOES NOT intend to give an out of the box experience for LSP or DAP. Other plugins already 
 accomplish this for certain languages, like [rust-tools.nvim](https://github.com/simrat39/rust-tools.nvim),
 or [go.nvim](https://github.com/ray-x/go.nvim).
 
-- This plugin doesn't manage your LSP codelenses, not showing them, not refreshing them, only adds the commands for executed lenses not supported by the server.
+- This plugin DOES NOT manage your LSP codelenses, not showing them, not refreshing them. It only adds the commands for executed lenses that are not supported by the server.
 
-## Suported lenses
+## Supported lenses
 - `rust-analyzer.runSingle`
 - `rust-analyzer.debugSingle`
 
 ## Requirements
 - `neovim nightly` (or a version that includes this [commit](https://github.com/neovim/neovim/commit/19a77cd5a7cbd304e57118d6a09798223b6d2dbf)
-- `plenary` (optional for rust-runneables debbug)
-- `dap` (optional for rust-runneables debbug)
+- `plenary` (optional for rust-runnables debbug)
+- `dap` (optional for rust-runnables debbug)
 - for `rust-analyzer.debugSingle` command, a debug adapter configured for rust is required, [codelldb](https://github.com/vadimcn/vscode-lldb/) will be used by default to launch.
 Instructions for this configuration can be found on the [dap wiki](https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#ccrust-via-codelldb)
 
 ## Installation
 Use your favorite package manager.
+
 Using [packer.nvim](https://github.com/wbthomason/packer.nvim):
 ```lua
 use {
   'ericpubu/telescope.nvim',
-  -- Only to make debug working
+  -- Only required for debugging
   requires = { {"nvim-lua/plenary.nvim", "mfussenegger/nvim-dap"} }
 }
 ```
@@ -45,7 +48,7 @@ Or directly on packer:
 ```lua
 use {
   'ericpubu/telescope.nvim',
-  -- Only to make debug working
+  -- Only required for debugging
   requires = { {"nvim-lua/plenary.nvim", "mfussenegger/nvim-dap"} }
   config = function ()
     require("codelens_extensions").setup()
@@ -67,7 +70,7 @@ require("codelens_extensions").setup {
 
 ### init_rust_commands
 By default, this plugin will add the handler to the lens command, and add this command to `vim.lsp`.
-But you can change this flag and add the specific command on any part of your configuration
+But you can change this flag and add the specific command on any part of your configuration, for example:
 ```lua
 -- On your init.lua
 require("codelens_extensions").setup {
@@ -81,8 +84,4 @@ end
 ## Example usage:
 https://user-images.githubusercontent.com/18682359/135780475-14a037a0-c28f-4234-876b-6fe05e9f97aa.mov
 
-Note: in this example you see [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) as this configuration opens the ui on `dap.start()` 
-this plugin will only start the debug adapter, not the ui.
-
-
-
+Note: in this example you see [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) as this configuration opens the ui on `dap.start()`. This plugin will only start the debug adapter, not the ui.

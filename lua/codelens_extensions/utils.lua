@@ -8,7 +8,7 @@ function M.delete_buf(bufnr)
 end
 
 function M.split(bufnr)
-  local cmd = config.split_vertical and "vsplit" or "split"
+  local cmd = config.vertical_split and "vsplit" or "split"
 
   vim.cmd(cmd)
   local win = vim.api.nvim_get_current_win()
