@@ -78,3 +78,11 @@ vim.lsp.commands["rust-analyzer.runSingle"] = function(command)
   require("codelens_extensions.rust-runnables").run_command(command.arguments[1].args)
 end
 ```
+## Example usage:
+https://user-images.githubusercontent.com/18682359/135780475-14a037a0-c28f-4234-876b-6fe05e9f97aa.mov
+
+Note: in this example you see [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) as this configuration opens the ui on `dap.start()` 
+this plugin will only start the debug adapter, not the ui.
+
+
+
