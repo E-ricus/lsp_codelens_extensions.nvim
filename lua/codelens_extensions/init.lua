@@ -13,7 +13,7 @@ M.setup = function(opts)
   end
 
   if opts.init_rust_commands ~= nil then
-      config.init_rust_commands = opts.init_rust_commands
+    config.init_rust_commands = opts.init_rust_commands
   end
 
   if config.init_rust_commands then

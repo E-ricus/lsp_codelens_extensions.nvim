@@ -33,6 +33,12 @@ end
 local function create_debug_args(runnable_args)
   local cargo_args = runnable_args.cargoArgs
 
+  if cargo_args[1] == "run" then
+    cargo_args[1] = "build"
+  elseif cargo_args[1] == "test" then
+    table.insert(cargo_args, 2, "--no-run")
+  end
+
   table.insert(cargo_args, "--message-format=json")
 
   for _, value in ipairs(runnable_args.cargoExtraArgs) do
@@ -41,11 +47,12 @@ local function create_debug_args(runnable_args)
   local exec_args = {}
   if not vim.tbl_isempty(runnable_args.executableArgs) then
     table.insert(exec_args, "--")
+    table.insert(cargo_args, "--")
     for _, value in ipairs(runnable_args.executableArgs) do
       table.insert(exec_args, value)
+      table.insert(cargo_args, value)
     end
   end
-  cargo_args = vim.tbl_deep_extend("keep", cargo_args, exec_args)
   return cargo_args, exec_args
 end
 
