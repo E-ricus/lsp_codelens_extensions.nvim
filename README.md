@@ -32,7 +32,7 @@ Use your favorite package manager.
 Using [packer.nvim](https://github.com/wbthomason/packer.nvim):
 ```lua
 use {
-  'ericpubu/lsp_codelens_extensions.nvim',
+  'E-ricus/lsp_codelens_extensions.nvim',
   -- Only required for debugging
   requires = { {"nvim-lua/plenary.nvim", "mfussenegger/nvim-dap"} }
 }
@@ -47,7 +47,7 @@ require("codelens_extensions").setup()
 Or directly on packer:
 ```lua
 use {
-  'ericpubu/lsp_codelens_extensions.nvim',
+  'E-ricus/lsp_codelens_extensions.nvim',
   -- Only required for debugging
   requires = { {"nvim-lua/plenary.nvim", "mfussenegger/nvim-dap"} }
   config = function ()
